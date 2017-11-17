@@ -1,153 +1,137 @@
 <br>
 <div class="container bklog col-12 ">
-        <!--div for header starts here-->
-        <div class="dark_header margin-bottom-15">
-                <i class="fa fa-tasks" id="task" aria-hidden="true"></i>
-        <strong class="text-center">Tasks </strong>
-        <!--div for header ends here-->
-        </div>
-        <!-- div for card text starts here  -->
-        <div class="card-text" id="scroll" dnd-sortable-container [dropZones]="['boxers-zone']" >
-                
-        <div class="test_q_list_item" id="list" *ngFor="let item of data; let i = index">
+  <!--div for header starts here-->
+  <div class="dark_header margin-bottom-15">
+    <i class="fa fa-tasks" id="task" aria-hidden="true"></i>
+    <strong class="text-center">Tasks </strong>
+    <!--div for header ends here-->
+    </div>
+    <!-- div for card text starts here  -->
+    <div class="card-text" id="scroll" dnd-sortable-container [dropZones]="['boxers-zone']" >
+      <div class="test_q_list_item" id="list" *ngFor="let item of data; let i = index">
         <!-- div for task details starts -->
         <div class="div_details ">
-                
-                <a class="contentstory" data-toggle="modal" href=#mymodal{{i}} >
-                <i class="fa fa-pencil" id="edit" aria-hidden="true"></i> 
-                </a>
-        <span  *ngIf = "item.status == 'Completed'"class="fa fa-check-square-o" id="checklist"></span>
-        <span style="text-align: justify;" dnd-sortable [sortableIndex]="i">{{item.title}}</span>
-        <!--div for task details ends  -->
+          <a class="contentstory" data-toggle="modal" href=#mymodal{{i}} >
+            <i class="fa fa-pencil" id="edit" aria-hidden="true"></i> 
+          </a>
+        	<span  *ngIf = "item.status == 'Completed'"class="fa fa-check-square-o" id="checklist"></span>
+        	<span style="text-align: justify;" dnd-sortable [sortableIndex]="i">{{item.title}}</span>
+        	<!--div for task details ends  -->
         </div>
-     
-     
-        <!--div for modal starts here-->
+     		<!--div for modal starts here-->
         <div class="modal  fade mdl" id="mymodal{{i}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <!-- div for modal dialog starts -->
-        <div class="modal-dialog modal-lg">
-        <!-- div for modal header starts -->
-        <div class="modal-header">
-            <strong>Edit Task</strong>
-            <!-- close button starts -->
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            <!-- close button ends -->
-                        </button>
-        <!-- div for modal header ends -->
-        </div>
-        <!--div for modal body starts  -->
-        <div class="modal-body">
-        <!-- form starts -->
-         
-        <form >
-                        <!-- datepicker for start and end dates -->
-                       
-                        <!-- div for content inside modal starts -->
-                        <div class="form-group"  ng-controller="dateCtrl" >
-                                <label for="exampleInputEmail1">Edit Task</label>
-                                <input class="form-control" value="{{item.title}}" placeholder="Write here to add your task" #tasks>
-                                
-                              </div>
-                              <label for="exampleInputEmail1" id="description">Description</label>
-                              <textarea input type="text-input" value="{{item.description}}"class="form-control" id="describe"  placeholder="Write the task description here" #description></textarea>
-                              
-                           <div class="row">
-                                   <div class="col-sm-3">
-                            <label for="exampleInputEmail1" id="plan">Planned Size</label>
-                            <input class="form-control" id="size" value="{{item.plannedSize}}" disabled #plannedSize></div>
-                            
-                        
-                                <div class="col-sm-4 " id="date"  #start>Start Date : {{item.startDate | date: "dd.MM.y" }}</div>
-                                
-                                <div class="col-sm-4" id="date" #end>End Date : {{item.startDate | date: "dd.MM.y" }}</div>
-                               <br>
-                           </div>
-                        
-                         <div class="row">
-                             <div class="col-md-4">
-                        <button  type="submit" value="sub" name="sub" class="btn rjt snip0059" id="icon1" (click)="updateBacklog(item.taskId,tasks.value,start.value,end.value,description.value,plannedSize.value)" data-dismiss="modal"
-                         target=_blank>Edit
-                        <!-- add button ends -->
-                         </button></div></div>
-                        <!--form ends  -->
-                        </form>
-        <!-- div for modal body ends -->
-        </div>
-        <!-- div for modal dialog ends -->
-        </div>
-         <!--div for modal ends here-->
-         
-        </div>
-        </div>
-        <div class="modal fade mdl" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-         <!-- div for modal dialog starts -->
-        <div class="modal-dialog modal-lg">
-        <!-- div for modal header starts -->
-        <div class="modal-header">
-            
+        	<div class="modal-dialog modal-lg">
+        	<!-- div for modal header starts -->
+        		<div class="modal-header">
+            	<strong>Edit Task</strong>
+            	<!-- close button starts -->
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              <!-- close button ends -->
+              </button>
+        			<!-- div for modal header ends -->
+        		</div>
+        		<!--div for modal body starts  -->
+        		<div class="modal-body">
+        		<!-- form starts -->
+         			<form >
+            	<!-- div for content inside modal starts -->
+            		<div class="form-group"  ng-controller="dateCtrl" >
+                  <label for="taskName"><strong>Edit Task</strong></label>
+                    <input class="form-control" value="{{item.title}}" placeholder="Write here to add your task" #tasks>
+								</div>
+								<label for="description" id="description"><strong>Description</strong></label>
+                <textarea input type="text-input" value="{{item.description}}"class="form-control" id="describe"  placeholder="Write the task description here" #description></textarea>
+                <div class="row">
+									<div class="col-sm-3">
+                    <label for="planSize" id="plan"><strong> Planned Size</strong></label>
+											<div class="col-sm-4" id="size" #plannedSize> {{item.plannedSize}}</div>
+									</div>
+									<div class="col-sm-4 " id="date"  #start><strong> Start Date</strong><br>
+										{{item.startDate | date: "dd.MM.y" }}</div>
+                  <div class="col-sm-4" id="date" #end><strong> End Date </strong> <br>{{item.startDate | date: "dd.MM.y" }}</div><br>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+                    <button  type="submit" value="sub" name="sub" class="btn rjt clicks" id="icon1" (click)="updateBacklog(item.taskId,tasks.value,start.value,end.value,description.value,plannedSize.value)" data-dismiss="modal" target=_blank>Edit
+                    <!-- add button ends -->
+										</button>
+									</div>
+								</div>
+                <!--form ends  -->
+              </form>
+        		  <!-- div for modal body ends -->
+        		</div>
+        		<!-- div for modal dialog ends -->
+        	</div>
+				 <!--div for modal ends here-->
+				</div>
+			</div>
+      <div class="modal fade mdl" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<!-- div for modal dialog starts -->
+				<div class="modal-dialog modal-lg">
+        	<!-- div for modal header starts -->
+        	<div class="modal-header">
             Add New Task
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-        <!-- div for modal header ends -->
-        </div>
-         <!-- div for modal body starts -->
-        <div class="modal-body">
-        <!-- form starts -->
-        <form >
-        <!-- datepicker for start and end dates -->
-       
-        <!-- div for content inside modal starts -->
-        <div class="form-group">
-                <label for="exampleInputEmail1">Add New Task</label>
-                <input class="form-control"  placeholder="Write here to add your task" #tasks>
-                
+            	<span aria-hidden="true">&times;</span>
+            </button>
+        		<!-- div for modal header ends -->
+        	</div>
+         	<!-- div for modal body starts -->
+        	<div class="modal-body">
+        		<!-- form starts -->
+        	<form>
+					<!-- datepicker for start and end dates -->
+					<!-- div for content inside modal starts -->
+        		<div class="form-group">
+            	<label for="add"><strong> New Task</strong></label>
+              <input class="form-control"  placeholder="Write here to add your task" #tasks>
+            </div>
+            <label for="description" id="description"> <strong>Description</strong></label>
+            <textarea input type="text-input" class="form-control" id="describe"  placeholder="Write the task description here" #description></textarea>
+            <div class="row">
+            	<div class="col-sm-3">
+            		<label for="plannedSize" id="plan"> <strong>Planned Size</strong></label>
+								<input class="form-control" id="size"  #plannedSize>
+							</div>
+          		<div class="col-sm-4 " id="date">
+            		<strong>Start Date</strong>
+								<my-date-picker name="mydate" [options]="myDatePickerOptions"
+								[(ngModel)]="startDate" required  id="start-date-input" #start>
+								</my-date-picker>
               </div>
-              <label for="exampleInputEmail1" id="description">Description</label>
-              <textarea input type="text-input" class="form-control" id="describe"  placeholder="Write the task description here" #description></textarea>
-              
-           <div class="row">
-                   <div class="col-sm-3">
-            <label for="exampleInputEmail1" id="plan">Planned Size</label>
-            <input class="form-control" id="size"  #plannedSize></div>
-            
-         
-         
-                <div class="col-sm-4 " id="date">
-            Start Date
-            <my-date-picker name="mydate" [options]="myDatePickerOptions"
-             [(ngModel)]="startDate" required  id="start-date-input" #start></my-date-picker>
-                </div>
-                
-                
-                <div class="col-sm-4" id="date">
-            End Date <my-date-picker name="mydate" [options]="myDatePickerOptions"
-            [(ngModel)]="endDate" required  id="end-date-input" #end></my-date-picker></div>
-               <br>
-                </div>
-         <div class="row">
-             <div class="col-md-4">
-        <button  type="submit" value="sub" name="sub" class="btn rjt snip0059" id="icon1" (click)="addBacklog(tasks.value,start.value,end.value,description.value,plannedSize.value)" data-dismiss="modal"
-         target=_blank>Add
-        <!-- add button ends -->
-         </button></div></div>
-        <!--form ends  -->
-        </form>
-        <!-- div for modal body ends -->
-        </div>
+              <div class="col-sm-4" id="date">
+								<strong> Date</strong> 
+								<my-date-picker name="mydate" [options]="myDatePickerOptions"
+									[(ngModel)]="endDate" required  id="end-date-input" #end>
+								</my-date-picker>
+							</div>
+              <br>
+            </div>
+         		<div class="row">
+            	<div class="col-md-4">
+        				<button  type="submit" value="sub" name="sub" class="btn rjt clicks" id="icon1" (click)="addBacklog(tasks.value,start.value,end.value,description.value,plannedSize.value)" data-dismiss="modal" target=_blank>Add
+        				<!-- add button ends -->
+								</button>
+							</div>
+						</div>
+        	<!--form ends  -->
+        	</form>
+					<!-- div for modal body ends -->
+				</div>
         <!-- div for modal dialog ends -->
-        </div>
-        </div>
-        <!-- div for card text ends here  --> 
-        </div>
-        
-        <div class="tool">
-        <!-- add button to add new task starts here -->
-        <button class="submit snip0059" data-toggle="modal" id="icon2" data-target="#myModal" type="submit">Add
-        <!-- add button to add new task ends here -->
-         </button>
-         <span class="tooltiptext">click here to add a new task</span>
-        </div>
-        <!--main div for task backlog starts here-->
-        </div>
+      </div>
+    </div>
+    <!-- div for card text ends here  --> 
+	</div>
+	<div class="tool">
+   <!-- add button to add new task starts here -->
+    <button class="submit clicks" data-toggle="modal" id="icon2" data-target="#myModal" type="submit">Add
+      <!-- add button to add new task ends here -->
+    </button>
+    <span class="tooltiptext">click here to add a new task</span>
+  </div>
+<!--main div for task backlog starts here-->
+</div>

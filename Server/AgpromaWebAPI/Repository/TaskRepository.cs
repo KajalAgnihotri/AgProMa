@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AgpromaWebAPI.Repository
 {
-
+    //interface
     public interface ITaskRepository
     {
         List<SignalRMaster> JoinGroup(int projectId);
@@ -18,6 +18,7 @@ namespace AgpromaWebAPI.Repository
         int GetStoryPlannedSize(int storyid);
         void Update_RemainingTime(ChecklistBacklog checklist);
     }
+
     public class TaskRepository : ITaskRepository
     {
 
@@ -28,6 +29,7 @@ namespace AgpromaWebAPI.Repository
 
         }
 
+        //this method will add new task to a user story
         public void Add(TaskBacklog bklog)
         {
             bklog.ActualSize = bklog.PlannedSize;
@@ -35,11 +37,13 @@ namespace AgpromaWebAPI.Repository
             _context.SaveChanges();
         }
 
+        //this method will return tasks of a particular user story
         public List<TaskBacklog> GetAll(int storyId)
         {
             return _context.Tasks.Where(m => m.StoryId == storyId).ToList();
         }
 
+        //this method is for updating details of a task
         public void Update(int id, TaskBacklog bklog)
         {
             TaskBacklog data = _context.Tasks.FirstOrDefault(m => m.TaskId == id);
@@ -67,6 +71,7 @@ namespace AgpromaWebAPI.Repository
             return onlineMembers.Where(n => memberIds.Contains(n.MemberId)).ToList();
         }
 
+        //this method will return project id of userstory
         public int GetProjectId(int userStoryId)
         {
             var sprintid = _context.Sprint_UserStory.Where(s => s.StoryId == userStoryId).Select(u => u.SprintId).SingleOrDefault();
@@ -74,11 +79,13 @@ namespace AgpromaWebAPI.Repository
             return _context.Sprints.Where(s => s.SprintId == sprintid).Select(s => s.ProjectId).SingleOrDefault();
         }
 
+        //this method will return planned size of user story 
         public int GetStoryPlannedSize(int storyid)
         {
             return _context.Userstories.Where(u => u.StoryId == storyid).Select(u => u.PlannedSize).SingleOrDefault();
         }
 
+        //this method will update remaining time in checklist
         public void Update_RemainingTime(ChecklistBacklog checklist)
         {
             TaskBacklog task = _context.Tasks.FirstOrDefault(m => m.TaskId == checklist.TaskId);

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace AgpromaWebAPI.Service
 {
+    //interface
     public interface ITaskServices
     {
         List<SignalRMaster> JoinGroup(int projectId);
@@ -27,12 +28,14 @@ namespace AgpromaWebAPI.Service
             _repository = repository;
         }
 
+        //this method will add new task to the backlog
         public string Add(TaskBacklog backlog)
         {
             int plannedsize = _repository.GetStoryPlannedSize(backlog.StoryId);
             int sum = 0;
-            sum = AveragePlanSize(backlog.StoryId);
+            sum = TotalSize(backlog.StoryId);
             sum += backlog.PlannedSize;
+            //here we are comparing sum of task planned size of a user story with user story planned size
             if (sum <= plannedsize)
             {
                 _repository.Add(backlog);
@@ -45,35 +48,40 @@ namespace AgpromaWebAPI.Service
 
         }
 
+        //this method will return all tasks of a user story
         public List<TaskBacklog> GetAll(int storyId)
-        {
-            //List<TackBacklogView> taskblv=new List<TaskBacklogView>();
+        { 
             List<TaskBacklog> taskbacklog = _repository.GetAll(storyId);
             return taskbacklog;
         }
 
+        //this method will update details of task
         public void Update(int id, TaskBacklog res)
         {
             _repository.Update(id, res);
 
         }
 
+        //this method will set connection
         public void SetConnectionId(string connectionId, int memberId)
         {
             _repository.SetConnectionId(connectionId, memberId);
         }
 
+        //this method will create group
         public List<SignalRMaster> JoinGroup(int projectId)
         {
             return _repository.JoinGroup(projectId);
         }
 
+        //this method will return projectId
         public int GetProjectId(int storyId)
         {
             int sp = _repository.GetProjectId(storyId);
-            return sp;//TASK TO DO
+            return sp;
         }
-        public int AveragePlanSize(int userStoryId)
+        //this method will calculate planned Size of tasks of a particular storyId
+        public int TotalSize(int userStoryId)
         {
             List<TaskBacklog> bck = _repository.GetAll(userStoryId);
             int sum = 0;
@@ -85,7 +93,7 @@ namespace AgpromaWebAPI.Service
             return sum;
         }
 
-
+        //this method will update  remaining time in checklist
         public void Update_RemainingTime(ChecklistBacklog checklist)
         {
             _repository.Update_RemainingTime(checklist);

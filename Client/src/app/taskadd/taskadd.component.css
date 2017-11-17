@@ -115,10 +115,7 @@ li{
 .mdl{
   box-shadow: rgba(0,0,0, 0.3) 20px 20px 20px;
 }
-/* textarea{
- border-color: black;
- border-radius:400px;
-} */
+
 .contentstory{
   text-decoration: none;
   color: black;
@@ -165,19 +162,12 @@ li{
   padding: 5px;
   border-radius: 1rem;
 }
-/* .form-rounded {
-border-radius: 2rem;
-color: black;
-margin-left: 30px;
-width: 400px;
-height:100px;
-} */
+
 #icon{
   margin-left: 30px;
 }
 #icon1{
   width: 80px;
-  /* margin-left: 30px; */
   margin-top: 20px;
   background:#009999;
   float:left;
@@ -193,7 +183,7 @@ height:100px;
   margin-left: 100px;
 }
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
-button.snip0059 {
+button.clicks {
 font-family: 'Raleway', Arial, sans-serif;
 border: none;
 background-color: #009999;
@@ -212,7 +202,7 @@ overflow: hidden;
 width: 80px;
 margin-top:30px;
 }
-button.snip0059:before {
+button.clicks:before {
 content: '';
 display: block;
 border-radius: 3px;
@@ -230,20 +220,20 @@ transition: all 0.3s;
 -webkit-transition-delay: 0.3s;
 transition-delay: 0.3s;
 }
-button.snip0059:hover,
-button.snip0059.hover {
+button.clicks:hover,
+button.clicks.hover {
 color: #ffffff;
 -webkit-animation: flashText 0.5s;
 animation: flashText 0.5s;
 }
-button.snip0059:hover:before,
-button.snip0059.hover:before {
+button.clicks:hover:before,
+button.clicks.hover:before {
 left: 12px;
 right: 12px;
 background-color: rgba(255, 255, 255, 0.1);
 opacity: 0.8;
 }
-button.snip0059:active:before {
+button.clicks:active:before {
 background-color: rgba(255, 255, 255, 0.3);
 opacity: 1;
 -webkit-transition-delay: 0s;
@@ -282,9 +272,9 @@ transition-delay: 0s;
 }
 #size{
   width: 60px;
+  height: 40px;
   
 }
-
 
 .tool {
   position: relative;
